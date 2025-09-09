@@ -25,7 +25,7 @@ def visualize_data(input_ax, x_0, y_0, x_1, y_1):
 # Function to read the csv dataset
 def read_dataset():
 
-    return(pd.read_csv(CSV)
+    return(pd.read_csv(CSV))
 
 # Function to create sample/label pairs
 def training_data(input: pd.DataFrame):
