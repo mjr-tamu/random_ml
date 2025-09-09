@@ -23,7 +23,7 @@ def visualize_data(input_ax, x_0, y_0, x_1, y_1):
 # Function to read the csv dataset
 def read_dataset():
 
-    return(pd.read_csv("./iris.csv"))
+    return(pd.read_csv("../iris.csv"))
 
 # Function to create sample/label pairs
 def training_data(input: pd.DataFrame):
@@ -70,6 +70,7 @@ class Perceptron:
         self.learning_rate = learning_rate
         self.iterations = iterations
         self.activation = self.activation_function
+        self.errors_per_epoch = []
         self.weights = None
         self.bias = None
 
@@ -129,6 +130,10 @@ class Perceptron:
 
                     self.weights_text.set_text(f"Weights: {self.weights}")
 
+            if (errors > 0):
+
+                self.errors_per_epoch.append(errors)
+
             # After iterating through all samples, if there are no errors, end the algorithm
             if (errors == 0):
 
@@ -155,7 +160,7 @@ class Perceptron:
         line_color = "red" if final else "green"
         self.last_line, = self.saved_plot.plot(x, y, color=line_color)
         
-        plt.pause(0.75)
+        plt.pause(0.3)
 
 
     # Activation Function (Step Function)
@@ -192,3 +197,13 @@ if __name__ == "__main__":
     print(f"Final weights and bias: {model.learning(features, labels, ax)}")
 
     plt.show()
+
+    # Plotting convergence (errors)
+    plt.figure()
+    plt.title("Perceptron Convergence")
+    plt.xlabel("Epoch")
+    plt.ylabel("Number of Misclassifications")
+    plt.plot(model.errors_per_epoch, marker="o")
+
+    plt.show()
+
