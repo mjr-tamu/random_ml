@@ -1,7 +1,9 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[2]   # repo root
+CSV = ROOT / "data" / "raw" / "iris.csv"
 
 # Function to plot data
 def visualize_data(input_ax, x_0, y_0, x_1, y_1):
@@ -23,7 +25,7 @@ def visualize_data(input_ax, x_0, y_0, x_1, y_1):
 # Function to read the csv dataset
 def read_dataset():
 
-    return(pd.read_csv("./iris.csv"))
+    return(pd.read_csv(CSV)
 
 # Function to create sample/label pairs
 def training_data(input: pd.DataFrame):
